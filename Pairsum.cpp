@@ -2,21 +2,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, a, b) for (int i = a; i < b; i++)
-void pairsum(int arr[], int n, int sum)
+int pairsum(int arr[], int n, int sum)
+
 {
+    vector<int> ans;
     for (int i = 0; i < n; i++)
     {
         for (int j = i + 1; j < n; j++)
         {
             if (arr[i] + arr[j] == sum)
             {
-                int temp1 = min(arr[i], arr[j]);
-                int temp2 = max(arr[i], arr[j]);
+                   vector<int> temp;
+                   temp.push_back(min(arr[i],arr[j]));
+                   temp.push_back(max(arr[i],arr[j]));
+                   ans.push_back(temp);
 
-                sort(temp1.begin(), temp2.end);
-                cout
-                    << temp1 << " " << temp2 << endl;
-                break;
+            
             }
         }
     }

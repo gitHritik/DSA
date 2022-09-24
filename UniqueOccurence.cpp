@@ -10,8 +10,7 @@ void UniqueOccurence(int arr[], int n)
 int32_t main()
 {
     int size;
-    cin >> size;
-
+    cin >> 
     int arr[100];
     for (int i = 0; i < n; i++)
     {
