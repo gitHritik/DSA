@@ -27,6 +27,6 @@ int32_t main()
     //  s.abc();
 
     // Operator overloading
-    show s;
-    s();
+    // show s;
+    // s();
 }

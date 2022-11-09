@@ -28,7 +28,7 @@ class GermanShepard : public Dog
 public:
     void says()
     {
-        cout << "Wow Wor" << endl;
+        cout << "Wow Wow" << endl;
     }
 };
 int32_t main()

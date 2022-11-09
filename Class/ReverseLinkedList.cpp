@@ -68,46 +68,41 @@ void insertInMiddle(Node *&tail, Node *&head, int pos, string name)
     newNodeStart->next = temp->next;
     temp->next = newNodeStart;
 }
+// void reverse(Node *&head)
+// {
 
-void deleteAtHead(Node *&tail, Node *&head, int postion)
+//     if (head->next == NULL)
+//     {
+//         cout << head->name << "->";
+//         return;
+//     }
+//     Node *curr = head;
+//
+//     Node *prev = NULL;
+//     Node *forward = NULL;
+//     while (curr != NULL)
+//     {
+//         forward = curr->next;
+//         curr->next = prev;
+//         prev = curr;
+//         curr = forward;
+
+//         head = prev;
+//     }
+// }
+Node *RecursiveReverse(Node *&head)
 {
-    Node *temp = head;
 
-    // deleting first node of head
-    if (postion == 1)
+    if (head->next == NULL)
     {
-        head = head->next;
-        temp->next = NULL;
-        delete temp;
+        return head;
     }
-    else
-    {
-        Node *curr = head;
-        Node *prev = NULL;
-
-        int cnt = 1;
-        while (cnt < postion)
-        {
-            prev = curr;
-            curr = curr->next;
-            cnt++;
-        }
-        if (curr->next == NULL)
-        {
-            prev->next = curr->next;
-            tail = prev;
-            curr->next = NULL;
-            delete curr;
-        }
-        else
-        {
-            prev->next = curr->next;
-
-            curr->next = NULL;
-            delete curr;
-        }
-    }
+    Node *chotaHead = RecursiveReverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return chotaHead;
 }
+
 void print(Node *head)
 {
     Node *temp = head;
@@ -126,26 +121,14 @@ int32_t main()
 
     Node *head = node1;
     Node *tail = node1;
-    print(head);
 
-    // insertAtHead(head, "neha");
-    // print(head);
-    // insertAtHead(head, "rishabh");
-    // print(head);
+    insertAtHead(head, "neha");
 
-    insertAtTail(tail, "neha");
-    // print(head);
+    insertAtHead(head, "rishabh");
+
+    insertAtTail(tail, "sudhanshu");
     insertAtTail(tail, "priya");
-    // print(head);
-    insertInMiddle(tail, head, 4, "love");
     print(head);
-
-    // cout << "Head " << head->name << endl;
-    // cout << "Tail " << tail->name << endl;
-
-    deleteAtHead(tail, head, 4);
-    print(head);
-
-    cout << "Head " << head->name << endl;
-    cout << "Tail " << tail->name << endl;
+    Node *chothead = RecursiveReverse(head);
+    print(chothead);
 }
