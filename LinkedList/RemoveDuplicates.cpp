@@ -1,0 +1,118 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(i, a, b) for (int i = a; i < b; i++)
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+    ~Node()
+    {
+        int value = this->data;
+        while (this->next != NULL)
+        {
+            delete next;
+            this->next = NULL;
+        }
+        cout << "Memory free for " << value << endl;
+        ;
+    }
+};
+
+void print(Node *head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << "->";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+void insertAtHead(Node *&head, int data)
+{
+    Node *newNode = new Node(data);
+    newNode->next = head;
+    head = newNode;
+}
+
+void insertAttail(Node *&tail, int data)
+{
+    Node *newNode = new Node(data);
+    tail->next = newNode;
+    tail = newNode;
+}
+
+void insertAtMiddle(Node *&tail, Node *&head, int data, int pos)
+{
+
+    if (pos == 1)
+    {
+        insertAtHead(head, data);
+        return;
+    }
+    Node *temp = head;
+    int count = 1;
+    Node *newNode = new Node(data);
+    while (count < pos - 1)
+    {
+        temp = temp->next;
+        count++;
+    }
+    if (temp->next == NULL)
+    {
+        insertAttail(tail, data);
+        return;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void removeDuplicated(Node *head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+
+    Node *curr = head;
+    while (curr != NULL)
+    {
+        if ((curr->next != NULL) && curr->data == curr->next->data)
+        {
+            // if data is equla
+            Node *next_next = curr->next->next;
+            Node *nodeTodelete = curr->next;
+            curr->next = next_next;
+            delete nodeTodelete;
+        }
+        else
+        {
+            curr = curr->next;
+        }
+    }
+}
+
+int32_t main()
+{
+    Node *node1 = new Node(10);
+    Node *head = node1;
+    Node *tail = node1;
+    insertAttail(tail, 3);
+    insertAttail(tail, 3);
+    insertAttail(tail, 3);
+    insertAttail(tail, 3);
+    insertAtMiddle(tail, head, 4, 6);
+    print(head);
+
+    removeDuplicated(head);
+    print(head);
+}
